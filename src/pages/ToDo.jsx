@@ -1,13 +1,27 @@
-import { Perfil } from "../components/Perfil";
+import Perfil from "../components/Perfil.jsx";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
+import TaskForm from "../components/TaskForm.jsx";
+import { useState } from "react";
+
 
 const ToDo = () => {
-  // const [tareas, setTareas] = useState(0)
+  const [form, setForm] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
-  //TODO: Añadir tareas, grap and drop, popup
+  const handleOpenForm = () => {
+    setForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setForm(false);
+  };
+
+  const handleAddTask = (task) => {
+    setTasks([...tasks, task]);
+  };
 
   return (
-    <section className="flex flex-col items-center gap-5">
+    <section className="flex flex-col items-center gap-5 relative">
       <Perfil />
 
       <div className="flex gap-4 p-3 rounded-xl bg-[#07140A] text-white font-semibold">
@@ -30,10 +44,22 @@ const ToDo = () => {
           placeholder="Buscar tarea"
         />
 
-        <button className="bg-[#07140A] text-white placeholder-[#FEFAE0] font-bold p-3 rounded-lg text-3xl">
+        <button onClick={handleOpenForm} className="bg-[#07140A] text-white placeholder-[#FEFAE0] font-bold p-3 rounded-lg text-3xl">
           <IoMdAdd />
         </button>
       </div>
+
+      {form ? <TaskForm handleCloseForm={handleCloseForm} onSubmit={handleAddTask} /> : ""}
+
+      <ul className="w-[90vw] bg-[#07140A] text-white rounded-lg p-3">
+        {tasks.map((task, index) => (
+          <li key={index} className="flex flex-col gap-2 p-2 border-b">
+            <h3 className="text-[#DDA15E] font-bold">{task.title}</h3>
+            <p>{task.description}</p>
+            <span className="text-[#BC6C25]">{task.priority}</span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };

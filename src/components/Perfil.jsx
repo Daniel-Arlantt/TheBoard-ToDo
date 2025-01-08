@@ -1,6 +1,6 @@
 import perfil from "../assets/Images/perfil.png";
 
-export const Perfil = () => {
+const Perfil = () => {
   return (
     <>
       <div className="bg-[#07140A] flex w-[90vw] text-[#FEFAE0] mt-5 px-3 py-2 rounded-xl items-center">
@@ -24,3 +24,5 @@ export const Perfil = () => {
     </>
   );
 };
+
+export default Perfil;
