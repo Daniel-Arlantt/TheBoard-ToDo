@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TaskForm = ({ handleCloseForm, onSubmit }) => {
+const TaskForm = ({ handleCloseForm, handleAddTask }) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -8,11 +8,11 @@ const TaskForm = ({ handleCloseForm, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Evita el comportamiento por defecto del formulario
-    onSubmit({
+    handleAddTask({
       title: title,
       description: description,
       priority: priority,
-    });
+});
     handleCloseForm(); // Cierra el formulario
   };
 
@@ -31,7 +31,7 @@ const TaskForm = ({ handleCloseForm, onSubmit }) => {
           placeholder="Titulo"
           className="bg-[#606C38] placeholder-white font-bold p-3 rounded-lg"
         />
-        <input
+        <textarea
           type="text"
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Descripción"
@@ -44,15 +44,15 @@ const TaskForm = ({ handleCloseForm, onSubmit }) => {
           className="flex gap-3 font-bold"
         >
           <label className="flex gap-2 items-center text-[#BC6C25] ">
-            <input type="checkbox" name="Alta" value="Alta" />
+            <input type="radio" name="priority" value="Alta" />
             Alta
           </label>
           <label className="flex gap-2 items-center text-[#BC6C25]">
-            <input type="checkbox" name="Media" value="Media" />
+            <input type="radio" name="priority" value="Media" />
             Media
           </label>
           <label className="flex gap-2 items-center text-[#BC6C25]">
-            <input type="checkbox" name="Baja" value="Baja" />
+            <input type="radio" name="priority" value="Baja" />
             Baja
           </label>
         </div>

@@ -3,7 +3,6 @@ import { IoMdAdd, IoMdSearch } from "react-icons/io";
 import TaskForm from "../components/TaskForm.jsx";
 import { useState } from "react";
 
-
 const ToDo = () => {
   const [form, setForm] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -17,7 +16,7 @@ const ToDo = () => {
   };
 
   const handleAddTask = (task) => {
-    setTasks([...tasks, task]);
+    setTasks([...tasks, task]); // Agarra los elementos que tiene tasks y añade los del parametro (task) enviado desde el form
   };
 
   return (
@@ -44,22 +43,39 @@ const ToDo = () => {
           placeholder="Buscar tarea"
         />
 
-        <button onClick={handleOpenForm} className="bg-[#07140A] text-white placeholder-[#FEFAE0] font-bold p-3 rounded-lg text-3xl">
+        <button
+          onClick={handleOpenForm}
+          className="bg-[#07140A] text-white placeholder-[#FEFAE0] font-bold p-3 rounded-lg text-3xl"
+        >
           <IoMdAdd />
         </button>
       </div>
 
-      {form ? <TaskForm handleCloseForm={handleCloseForm} onSubmit={handleAddTask} /> : ""}
+      {form ? (
+        <TaskForm
+          handleCloseForm={handleCloseForm}
+          handleAddTask={handleAddTask}
+        />
+      ) : (
+        ""
+      )}
 
-      <ul className="w-[90vw] bg-[#07140A] text-white rounded-lg p-3">
-        {tasks.map((task, index) => (
-          <li key={index} className="flex flex-col gap-2 p-2 border-b">
-            <h3 className="text-[#DDA15E] font-bold">{task.title}</h3>
-            <p>{task.description}</p>
-            <span className="text-[#BC6C25]">{task.priority}</span>
-          </li>
-        ))}
-      </ul>
+      {tasks.map((task, i) => (
+        <div
+          className="w-[90vw] bg-[#07140A] text-white rounded-lg p-3"
+          key={i}
+        >
+          <h3 className="text-[#DDA15E] font-bold text-xl">
+          {task.title}
+          </h3>
+          <p className="text-[#FEFAE0] font-medium my-1">
+          {task.description}
+          </p>
+          <h3 className="text-[#BC6C25] font-medium text-lg">
+            Prioridad: <b className="text-[#FEFAE0]">{task.priority}</b>
+          </h3>
+        </div>
+      ))}
     </section>
   );
 };
