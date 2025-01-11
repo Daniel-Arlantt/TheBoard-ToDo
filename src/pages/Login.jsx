@@ -29,7 +29,7 @@ const Login = () => {
         <p className="flex gap-1 font-semibold text-[#FEFAE0] mb-5 ">
           ¿No tienes una cuenta?
           <Link 
-          className="text-[#DDA15E]  font-bold" 
+          className="text-[#DDA15E] font-bold" 
           to="/register">
             Registrate
           </Link>
